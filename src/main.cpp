@@ -9,5 +9,9 @@ int main()
 
     // Initializations
     Player user1{create_player()};
-    return 0;
+    std::array<int, 9> gameBoard{construct_game_board()};
+
+    draw_game_board(gameBoard);
+
+        return 0;
 }
