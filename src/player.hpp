@@ -5,7 +5,8 @@
 struct Player
 {
     std::string name;
-    int symbol;
+    char symbol;
 };
 
 Player create_player();
+Player create_AI(char symbolPlayer, char symbol1 = 'X', char symbol2 = 'O');

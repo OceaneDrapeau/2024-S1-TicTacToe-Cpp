@@ -28,7 +28,6 @@ Player create_player()
 
         std::getline(std::cin, tempSymbol);
 
-        //
         if (tempSymbol.size() == 1)
         {
             tempSymbol[0] = std::toupper(tempSymbol[0]);
@@ -40,10 +39,18 @@ Player create_player()
         }
         else
         {
-            player.symbol = (tempSymbol == symbol1) ? 1 : 2;
+            player.symbol = tempSymbol[0];
         };
 
     } while (tempSymbol != symbol1 && tempSymbol != symbol2);
 
     return player;
 };
+
+Player create_AI(char symbolPlayer, char symbol1, char symbol2)
+{
+    Player AI{};
+    AI.name = "AI";
+    AI.symbol = (symbolPlayer == symbol1) ? symbol2 : symbol1;
+    return AI;
+}
