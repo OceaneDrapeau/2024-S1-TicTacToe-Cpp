@@ -1,6 +1,7 @@
 #include <iostream>
 #include "player.hpp"
 #include "game_board.hpp"
+#include "menu.hpp"
 
 int main()
 {
@@ -10,6 +11,7 @@ int main()
     // Initializations
     Player user1{create_player()};
     std::array<int, 9> gameBoard{construct_game_board()};
+    int choiceStartMenu{start_menu()};
     Player player1{create_player()};
     Player player2{create_AI(player1.symbol)};
 
