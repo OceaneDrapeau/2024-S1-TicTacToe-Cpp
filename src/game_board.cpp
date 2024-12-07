@@ -5,14 +5,14 @@ char const symbol2{'O'};
 char const empty{' '};
 char const separator{'|'};
 
-std::array<char, 9> construct_game_board(char const empty)
+std::array<char, 9> create_game_board(char const empty)
 {
     std::array<char, 9> gameBoard{};
     gameBoard.fill(empty);
     return gameBoard;
 }
 
-void draw_game_board(std::array<char, 9> const gameBoard, char const empty)
+void draw_game_board(std::array<char, 9> const &gameBoard, char const empty)
 {
     int newLine{3};
     char const separator{'|'};
