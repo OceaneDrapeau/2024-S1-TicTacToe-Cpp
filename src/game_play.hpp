@@ -1,7 +1,11 @@
 #pragma once
+
 #include <array>
 #include <vector>
+#include <terminal_ctrl.hpp>
+
 #include "player.hpp"
+#include "menu.hpp"
 
 enum class Move
 {
@@ -17,3 +21,4 @@ enum class Move
 };
 
 bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int lastPosition, char empty);
+int play(std::array<char, 9> &gameBoard, Player player);

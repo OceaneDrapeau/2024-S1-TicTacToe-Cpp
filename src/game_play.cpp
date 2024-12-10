@@ -1,9 +1,9 @@
-#include <iostream>
 #include "game_play.hpp"
 
 std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int lastPosition, Move direction, int repeat, char empty)
 {
     // Initializations
+
     // gameBoard
     int gameBoardSize{static_cast<int>(gameBoard.size())};
     int nbOfColumns{3};
@@ -11,17 +11,15 @@ std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int last
     // Player
     int index{lastPosition};
     int move = static_cast<int>(direction);
+
+    // Symbol
     char symbol{gameBoard[lastPosition]};
 
-    // Output
-    std::array<int, 2> result{false, repeat};
-
     // Code
-    // Alignement of 3 empty
+    // Avoid alignement of 3 empty
     if (symbol == empty)
     {
-        result[1] = 1;
-        return result;
+        return {false, 1};
     };
 
     // Check if end of the gameBoard
@@ -30,8 +28,8 @@ std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int last
            !((move == static_cast<int>(Move::Left) && index % nbOfColumns == 0) ||                // check if out of line by the left
              (move == static_cast<int>(Move::Right) && index % nbOfColumns == nbOfColumns - 1) || // check if out of line by the right
 
-             (move == static_cast<int>(Move::RightToLeftDown) && index % nbOfColumns == 0) || // check if out of diagonal by the left
-             (move == static_cast<int>(Move::LeftToRightUp) && index % nbOfColumns == 2)))    // check if out of diagonal by the right
+             (move == static_cast<int>(Move::RightToLeftDown) && index % nbOfColumns == 0) ||            // check if out of diagonal by the left
+             (move == static_cast<int>(Move::LeftToRightUp) && index % nbOfColumns == nbOfColumns - 1))) // check if out of diagonal by the right
 
     {
         index += move;
@@ -42,22 +40,19 @@ std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int last
             repeat += 1;
             if (repeat == 3)
             {
-                result[0] = true;
-                return result;
+                return {true, repeat};
             }
         }
 
         // Symbol different
         else
         {
-            result[1] = 1;
-            return result;
+            return {false, 1};
         }
     }
 
     // End of the board but verification not complete
-    result[1] = repeat;
-    return result;
+    return {false, repeat};
 }
 
 // Directions
@@ -80,3 +75,10 @@ bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int
     return false;
 }
 
+int play(std::array<char, 9> &gameBoard, Player player)
+{
+    int position = playMenu(gameBoard, player);
+    gameBoard[position] = player.symbol;
+
+    return position;
+}
