@@ -1,28 +1,19 @@
 #include "menu.hpp"
-#include "player.hpp"
 
-int start_menu()
+int startMenu()
 {
-    int choice{};
-
-    std::cout << "Bienvenue dans le jeu du TicTacToe \nVeuillez choisir un mode de jeu :" << std::endl;
-
+    std::cout << "Bienvenue dans le jeu du TicTacToe" << std::endl;
+    std::cout << "\nVeuillez choisir un mode de jeu :" << std::endl;
     std::cout << "1. Deux joueurs \n2. Un joueur contre l'IA" << std::endl;
 
-    do
-    {
-        std::cout << "Mode : ";
-        std::cin >> choice;
+    return getValidInputInt("Mode : ", "Choisir un mode valide. Réessayez.\n", 1, 3);
+}
 
-        if (std::cin.fail() || (choice != 1 && choice != 2))
-        {
-            std::cin.clear();
-            std::cin.ignore(255, '\n');
-            std::cout << "Choisir un mode valide. Réessayez." << std::endl;
-        }
-    } while (choice != 1 && choice != 2);
+int playMenu(std::array<char, 9> &gameBoard, Player player)
+{
+    std::string symbol{};
+    symbol.push_back(player.symbol);
 
-    std::cin.ignore(255, '\n');
-
-    return choice;
+    std::cout << "Tour de " << player.name << "(" << player.symbol << ")" << std::endl;
+    return getValidPosition("Emplacement : ", "Choisir un emplacement valide. Réessayez.\n", gameBoard);
 }
