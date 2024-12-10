@@ -10,4 +10,4 @@ struct Player
 };
 
 Player create_player(char symbol1 = 'X', char symbol2 = 'O');
-Player create_player(char symbolPlayer, char symbol1 = 'X', char symbol2 = 'O', bool AI = true);
+Player create_player(Player player1, char symbol1 = 'X', char symbol2 = 'O', bool AI = true);
