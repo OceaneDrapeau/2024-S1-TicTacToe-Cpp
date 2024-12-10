@@ -13,7 +13,6 @@ std::string playerName()
 // Symbol of the player
 char playerSymbol(char symbol1, char symbol2)
 {
-    char symbol{};
     std::string firstSymbol{};
     std::string secondSymbol{};
     firstSymbol.push_back(symbol1);
@@ -31,24 +30,12 @@ char playerSymbol(char symbol1, char symbol2)
 
 Player create_player(char symbol1, char symbol2)
 {
-    // Initializations
-    Player player{};
-    char tempSymbol{};
-
-    player.name = playerName();
-    player.symbol = playerSymbol(symbol1, symbol2);
-
-    return player;
+    return {playerName(), playerSymbol(symbol1, symbol2)};
 };
 
 Player create_player(Player player1, char symbol1, char symbol2, bool AI)
 {
-    Player player{};
-
-    player.name = (AI) ? "AI" : playerName();
-
-    char symbolPlayer1{player1.symbol};
-    player.symbol = (symbolPlayer1 == symbol1) ? symbol2 : symbol1;
-
-    return player;
+    return {
+        (AI) ? "AI" : playerName(),
+        (player1.symbol == symbol1) ? symbol2 : symbol1};
 }
