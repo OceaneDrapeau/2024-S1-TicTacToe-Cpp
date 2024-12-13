@@ -14,6 +14,6 @@ int playMenu(std::array<char, 9> &gameBoard, Player player)
     std::string symbol{};
     symbol.push_back(player.symbol);
 
-    std::cout << "Tour de " << player.name << "(" << player.symbol << ")" << std::endl;
+    std::cout << "Tour de " << player.name << " (" << player.symbol << ")" << std::endl;
     return getValidPosition("Emplacement : ", "Choisir un emplacement valide. Réessayez.\n", gameBoard);
 }
