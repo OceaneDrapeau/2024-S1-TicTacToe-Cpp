@@ -75,10 +75,15 @@ bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int
     return false;
 }
 
-int play(std::array<char, 9> &gameBoard, Player player)
+int play(std::array<char, 9> &gameBoard, Player player, int turn)
 {
-    int position = playMenu(gameBoard, player);
-    gameBoard[position] = player.symbol;
+    if (turn < static_cast<int>(gameBoard.size()))
+    {
+        int position = playMenu(gameBoard, player);
+        gameBoard[position] = player.symbol;
 
-    return position;
+        return position;
+    }
+
+    return -1;
 }
