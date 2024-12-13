@@ -9,9 +9,9 @@ void invalidInput()
     };
 };
 
-bool validStr(std::string input)
+bool validStr(std::string const &input)
 {
-    return input.empty();
+    return !input.empty();
 };
 
 bool validChar(char input, std::vector<char> const &validInputs)
@@ -56,14 +56,23 @@ bool validPosition(int input, std::array<char, 9> const &gameBoard, char empty)
 std::string getValidInputStr(std::string const &nameField, std::string const &errorMessage)
 {
     // Initializations
-    std::string input{};
+    std::string input{""};
     bool inputValid{false};
+    bool start{true};
 
     // Code
     do
     {
         std::cout << nameField;
+
+        if (start)
+        {
+            std::cin.ignore(255, '\n');
+            start = false;
+        }
+
         std::getline(std::cin, input);
+
         inputValid = validStr(input);
 
         if (!inputValid)

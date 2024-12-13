@@ -20,7 +20,7 @@ char playerSymbol(char symbol1, char symbol2)
 
     std::string nameField{"Symbole (" + firstSymbol + " ou " + secondSymbol + ") : "};
     std::string errorMessage{"Choisir un symbole valide. Réessayez."};
-    std::vector<char> validInputs{'X', 'O'};
+    std::vector<char> validInputs{symbol1, symbol2};
     char symbol{getValidInputChar(nameField, errorMessage, validInputs)};
 
     symbol = (std::toupper(symbol) == std::toupper(symbol1)) ? symbol1 : symbol2;
@@ -30,7 +30,12 @@ char playerSymbol(char symbol1, char symbol2)
 
 Player create_player(char symbol1, char symbol2)
 {
-    return {playerName(), playerSymbol(symbol1, symbol2)};
+    Player player{};
+    player.name = playerName();
+    player.symbol = playerSymbol(symbol1, symbol2);
+
+    // return {playerName(), playerSymbol(symbol1, symbol2)};
+    return player;
 };
 
 Player create_player(Player player1, char symbol1, char symbol2, bool AI)
