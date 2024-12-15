@@ -79,7 +79,10 @@ int play(std::array<char, 9> &gameBoard, Player player, int turn)
 {
     if (turn < static_cast<int>(gameBoard.size()))
     {
-        int position = playMenu(gameBoard, player);
+        std::string symbol{};
+        symbol.push_back(player.symbol);
+
+        std::cout << "Tour de " << player.name << " (" << player.symbol << ")" << std::endl;
         gameBoard[position] = player.symbol;
 
         return position;

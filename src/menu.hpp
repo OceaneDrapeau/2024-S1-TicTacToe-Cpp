@@ -6,4 +6,3 @@
 #include "verification.hpp"
 
 int startMenu();
-int playMenu(std::array<char, 9> &gameBoard, Player player);
