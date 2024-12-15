@@ -7,6 +7,7 @@ struct Player
 {
     std::string name;
     char symbol;
+    bool isAI{false};
 };
 
 Player create_player(char symbol1 = 'X', char symbol2 = 'O');
