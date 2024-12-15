@@ -83,9 +83,19 @@ int play(std::array<char, 9> &gameBoard, Player player, int turn)
         symbol.push_back(player.symbol);
 
         std::cout << "Tour de " << player.name << " (" << player.symbol << ")" << std::endl;
-        gameBoard[position] = player.symbol;
 
-        return position;
+        int position = (AI)
+                           ? playAI(gameBoard, empty)
+                           : getValidPosition("Emplacement : ", "Choisir un emplacement valide. Réessayez.\n", gameBoard);
+
+        if (position != -1)
+        {
+            gameBoard[position] = player.symbol;
+            std::cout << std::endl;
+            draw_game_board(gameBoard);
+
+            return position;
+        }
     }
 
     return -1;

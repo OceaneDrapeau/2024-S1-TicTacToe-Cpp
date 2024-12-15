@@ -4,8 +4,10 @@
 #include <vector>
 #include <terminal_ctrl.hpp>
 
+#include "verification.hpp"
 #include "player.hpp"
 #include "menu.hpp"
+#include "game_board.hpp"
 
 enum class Move
 {
@@ -20,5 +22,5 @@ enum class Move
     LeftToRightUp = -2
 };
 
-bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int lastPosition, char empty);
-int play(std::array<char, 9> &gameBoard, Player player, int turn);
+bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int lastPosition, int turn, char empty = ' ');
+int play(std::array<char, 9> &gameBoard, Player player, int turn, bool AI, char empty = ' ');

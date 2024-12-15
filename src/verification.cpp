@@ -173,7 +173,7 @@ int getValidPosition(std::string const &nameField, std::string const &errorMessa
         std::cin >> input;
 
         invalidInput();
-        inputValid = validPosition(input, gameBoard, empty);
+        inputValid = validPosition(input - 1, gameBoard, empty);
 
         if (!inputValid)
         {
@@ -182,5 +182,5 @@ int getValidPosition(std::string const &nameField, std::string const &errorMessa
 
     } while (!inputValid);
 
-    return input;
+    return input - 1;
 };
