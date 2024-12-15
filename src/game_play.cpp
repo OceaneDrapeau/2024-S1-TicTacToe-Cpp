@@ -16,10 +16,10 @@ std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int last
     char symbol{gameBoard[lastPosition]};
 
     // Code
-    // Avoid alignement of 3 empty
+    // Avoid wrong placement
     if (symbol == empty)
     {
-        return {false, 1};
+        return {false, -1};
     };
 
     // Check if end of the gameBoard
@@ -47,7 +47,7 @@ std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int last
         // Symbol different
         else
         {
-            return {false, 1};
+            return {false, 0};
         }
     }
 
@@ -60,26 +60,60 @@ std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int last
 // Diagonal Left to Right Down (\) = +4, Diagonal Right to Left Up (\) = -4
 // Diagonal Right to Left Down (/) = +2, Diagonal Left to Right Up (/) = -2
 
-bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int lastPosition, char empty)
+bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int lastPosition, int turn, char empty)
 {
     if (turn < 2)
     {
         return false;
     };
+
+    bool skip{false};
+    bool newDirection{true};
     std::array<int, 2> result{false, 1};
 
     for (Move move : directions)
     {
-        result = checkDirection(gameBoard, lastPosition, move, result[1], empty);
-        if (result[0])
+        if (!skip)
         {
-            return true;
+            result = checkDirection(gameBoard, lastPosition, move, result[1], empty);
+            if (result[0])
+            {
+                return true;
+            }
+            else if (result[1] == 0 && newDirection)
+            {
+                skip = true;
+            }
+            else if (result[1] == -1)
+            {
+                // empty placement
+                return false;
+            }
         }
+        else
+        {
+            result[1] = 1;
+            skip = false;
+        }
+        newDirection = !newDirection;
     }
+
     return false;
 }
 
-int play(std::array<char, 9> &gameBoard, Player player, int turn)
+int playAI(std::array<char, 9> &gameBoard, char empty = ' ')
+{
+    for (int i{0}; i < static_cast<int>(gameBoard.size()); i++)
+    {
+        if (gameBoard[i] == empty)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int play(std::array<char, 9> &gameBoard, Player player, int turn, bool AI, char empty)
 {
     if (turn < static_cast<int>(gameBoard.size()))
     {

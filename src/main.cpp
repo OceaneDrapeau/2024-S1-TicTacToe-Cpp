@@ -31,18 +31,20 @@ int main()
 
     Player player1{};
     Player player2{};
-    Player activePlayer{player1};
     bool AI{};
     int lastPosition{0};
 
     // Menu
     int choiceStartMenu{startMenu()};
-    std::cout << "option choisie : " << choiceStartMenu << std::endl;
 
+    std::cout << "\nJoueur 1" << std::endl;
     player1 = create_player();
 
     AI = (choiceStartMenu == 2);
+    std::cout << ((!AI) ? "\nJoueur 2" : "") << std::endl;
+
     player2 = create_player(player1, symbol1, symbol2, AI);
+    std::cout << std::endl;
 
     if (player2.symbol == symbol1)
     {
@@ -53,15 +55,15 @@ int main()
     draw_game_board(gameBoard);
     do
     {
-
-        lastPosition = play(gameBoard, player1, turn);
-        draw_game_board(gameBoard);
+        std::cout << std::endl;
+        lastPosition = play(gameBoard, player1, turn, player1.isAI, empty);
         gameOver =
             (lastPosition == -1)
-                ? false
-                : win(gameBoard, directions, lastPosition, empty);
+                ? true
+                : win(gameBoard, directions, lastPosition, turn, empty);
 
         std::swap(player1, player2);
+        turn += 1;
 
     } while (!gameOver);
 
