@@ -62,6 +62,10 @@ std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int last
 
 bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int lastPosition, char empty)
 {
+    if (turn < 2)
+    {
+        return false;
+    };
     std::array<int, 2> result{false, 1};
 
     for (Move move : directions)
