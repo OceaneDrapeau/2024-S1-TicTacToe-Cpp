@@ -7,8 +7,8 @@ struct Player
 {
     std::string name;
     char symbol;
-    bool isAI{false};
+    bool isAI{false}; // more secure than name = "AI"
 };
 
-Player create_player(char symbol1 = 'X', char symbol2 = 'O');
-Player create_player(Player player1, char symbol1 = 'X', char symbol2 = 'O', bool AI = true);
+Player create_player(char const symbol1 = 'X', char const symbol2 = 'O');
+Player create_player(Player const &player1, char const symbol1 = 'X', char const symbol2 = 'O', bool const AI = true);

@@ -1,8 +1,9 @@
 #include "menu.hpp"
 
+// Display menu
 int startMenu()
 {
-    std::cout << "Bienvenue dans le jeu du TicTacToe" << std::endl;
+    std::cout << "\nBienvenue dans le jeu du TicTacToe" << std::endl;
     std::cout << "\nVeuillez choisir un mode de jeu :" << std::endl;
     std::cout << "1. Deux joueurs \n2. Un joueur contre l'IA" << std::endl;
 

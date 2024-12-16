@@ -11,7 +11,7 @@ std::string playerName()
 }
 
 // Symbol of the player
-char playerSymbol(char symbol1, char symbol2)
+char playerSymbol(char const symbol1, char const symbol2)
 {
     std::string firstSymbol{};
     std::string secondSymbol{};
@@ -28,7 +28,8 @@ char playerSymbol(char symbol1, char symbol2)
     return symbol;
 }
 
-Player create_player(char symbol1, char symbol2)
+// Create first player (possible to call it without any parameters)
+Player create_player(char const symbol1, char const symbol2)
 {
     Player player{};
     player.name = playerName();
@@ -37,7 +38,8 @@ Player create_player(char symbol1, char symbol2)
     return player;
 };
 
-Player create_player(Player player1, char symbol1, char symbol2, bool AI)
+// Create second player
+Player create_player(Player const &player1, char const symbol1, char const symbol2, bool const AI)
 {
     return {
         (AI) ? "AI" : playerName(),

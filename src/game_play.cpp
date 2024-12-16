@@ -1,10 +1,12 @@
 #include "game_play.hpp"
 
-std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int lastPosition, Move direction, int repeat, char empty)
+// Check all direction for a win condition based on the last position
+
+std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int const lastPosition, Move const direction, int repeat, char const empty)
 {
     // Initializations
 
-    // gameBoard
+    // game board
     int gameBoardSize{static_cast<int>(gameBoard.size())};
     int nbOfColumns{3};
 
@@ -60,7 +62,8 @@ std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int last
 // Diagonal Left to Right Down (\) = +4, Diagonal Right to Left Up (\) = -4
 // Diagonal Right to Left Down (/) = +2, Diagonal Left to Right Up (/) = -2
 
-bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int lastPosition, int turn, char empty)
+// Check if a player won
+bool win(std::array<char, 9> const &gameBoard, std::vector<Move> const directions, int const lastPosition, int const turn, char const empty)
 {
     if (turn < 2)
     {
@@ -69,6 +72,7 @@ bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int
 
     bool skip{false};
     bool newDirection{true};
+
     std::array<int, 2> result{false, 1};
 
     for (Move move : directions)
@@ -101,7 +105,8 @@ bool win(std::array<char, 9> const &gameBoard, std::vector<Move> directions, int
     return false;
 }
 
-int playAI(std::array<char, 9> &gameBoard, char empty = ' ')
+// Find the next position empty for AI
+int playAI(std::array<char, 9> &gameBoard, char const empty = ' ')
 {
     for (int i{0}; i < static_cast<int>(gameBoard.size()); i++)
     {
@@ -113,10 +118,12 @@ int playAI(std::array<char, 9> &gameBoard, char empty = ' ')
     return -1;
 }
 
-int play(std::array<char, 9> &gameBoard, Player player, int turn, bool AI, char empty)
+// Play one turn
+int play(std::array<char, 9> &gameBoard, Player const player, int const turn, bool const AI, char const empty, bool const help)
 {
     if (turn < static_cast<int>(gameBoard.size()))
     {
+        // Initializations
         std::string symbol{};
         symbol.push_back(player.symbol);
 
@@ -126,11 +133,17 @@ int play(std::array<char, 9> &gameBoard, Player player, int turn, bool AI, char 
                            ? playAI(gameBoard, empty)
                            : getValidPosition("Emplacement : ", "Choisir un emplacement valide. Réessayez.\n", gameBoard);
 
+        if (AI)
+        {
+            std::cout << "Emplacement choisi par l'IA : " << position + 1 << std::endl;
+        }
+
+        // If valid position change right symbol + display game board with changes
         if (position != -1)
         {
             gameBoard[position] = player.symbol;
             std::cout << std::endl;
-            draw_game_board(gameBoard);
+            draw_game_board(gameBoard, empty, help);
 
             return position;
         }

@@ -1,10 +1,6 @@
 #include "game_board.hpp"
 
-char const symbol1{'X'};
-char const symbol2{'O'};
-char const empty{' '};
-char const separator{'|'};
-
+// Initialization of game board to all empty
 std::array<char, 9> create_game_board(char const empty)
 {
     std::array<char, 9> gameBoard{};
@@ -12,18 +8,27 @@ std::array<char, 9> create_game_board(char const empty)
     return gameBoard;
 }
 
-void draw_game_board(std::array<char, 9> const &gameBoard, char const empty)
+// Display game board
+void draw_game_board(std::array<char, 9> const &gameBoard, char const empty, bool const help)
 {
+    // Initializations
     int newLine{3};
     char const separator{'|'};
-    // int count{0};
+    int count{0};
 
+    // Display
     for (char element : gameBoard)
     {
-        // count += 1;
-        // std::cout << separator << ' ' << count << ' ';
-
-        std::cout << separator << empty << element << empty;
+        std::cout << separator << empty;
+        count += 1;
+        if (help && element == empty)
+        {
+            std::cout << count << empty;
+        }
+        else
+        {
+            std::cout << element << empty;
+        }
 
         newLine -= 1;
 
