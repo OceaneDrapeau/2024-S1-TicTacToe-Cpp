@@ -50,7 +50,7 @@ Ces fichiers contiennent le menu de démarrage, permettent son affichage et réc
 
 ## 📊 Bilan
 
-🆘 Création `checkDirection`
+🆘 Problème : création `checkDirection`
 
 Lors de la création de cette fonction, j'ai eu du mal avec le fait que le tableau soit en une seule dimension et les limites invisibles du plateau de jeu.
 
@@ -67,7 +67,7 @@ Pour résoudre ce problème j'ai ajouté des conditions plus strictes dans la fo
 (move == static_cast<int>(Move::LeftToRightUp) && index % nbOfColumns == nbOfColumns - 1))
 ```
 
-🆘 Trop de changements de direction
+🆘 Problème : Trop de changements de direction
 
 Lorsque la fonction `checkDirection` trouve un symbole identique dans une direction et qu'elle ne peut pas continuer, elle change de direction et continue le même compte.
 
@@ -105,6 +105,17 @@ Pour régler ce problème, j'ai ajouté un compteur `change` qui ajoute 1 dès q
 J'ai également ajouté une condition qui fait que si on a changé plus de deux fois de directions en gardant le même compteur (c'est à dire qu'on a trouvé un symbole identique dans trois directions), c'est qu'il y a eu une erreur quelque part.
 
 🚨 Sécurité `checkDirection`
+
 En l'état la fonction est opérationnelle. Cependant, par manque de temps, j'ai fait l'impasse sur la sécurité de la fonction et sur son utilisation.
 
 En effet, si l'on venait à modifier le tableau `directions` en ajoutant, en supprimant ou en échangeant deux directions, les variables `skip` et `newDirection` n'auront pas le bon comportement. De même, l'ordre des directions permet de tester un sens puis le sens inverse directement, ce qui aurait été bien ce serait de le définir qu'une seule fois et de faire dans un cas + le mouvement et dans l'autre - le mouvement.
+
+🆘Problème : `playAI`
+
+Au début je pensais qu'il fallait faire jouer l'IA sur la première case vide du plateau de jeu, j'ai du modifier pour que ce soit aléatoire dans`getRandomPosition`.
+
+Cependant, j'avais gardé la même logique que pour le for prévu initialement (dès qu'une case est vide, je retourne la position) dans le while. (`while (gameBoard[i] == empty )`)
+
+🚁 Solution
+
+J'ai mis du temps à comprendre, puisque aucune erreur était renvoyée lors de la compilation. C'est finalement en changeant la condition à `while (gameBoard[i] != empty )` que ça s'est résolu.
