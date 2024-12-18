@@ -2,7 +2,6 @@
 
 #include <array>
 #include <vector>
-#include <terminal_ctrl.hpp>
 
 #include "verification.hpp"
 #include "player.hpp"

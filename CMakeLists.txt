@@ -23,13 +23,13 @@ else()
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -pedantic-errors)
 endif()
 
-# Inclue la librairie Terminal Ctrl
-include(FetchContent)
-FetchContent_Declare(
-    terminal_ctrl
-    GIT_REPOSITORY https://github.com/dsmtE/terminal_ctrl
-    GIT_TAG "origin/main"
-)
+# # Inclue la librairie Terminal Ctrl
+# include(FetchContent)
+# FetchContent_Declare(
+#     terminal_ctrl
+#     GIT_REPOSITORY https://github.com/dsmtE/terminal_ctrl
+#     GIT_TAG "origin/main"
+# )
 
-FetchContent_MakeAvailable(terminal_ctrl)
-target_link_libraries(${PROJECT_NAME} PUBLIC terminal_ctrl)
+# FetchContent_MakeAvailable(terminal_ctrl)
+# target_link_libraries(${PROJECT_NAME} PUBLIC terminal_ctrl)
