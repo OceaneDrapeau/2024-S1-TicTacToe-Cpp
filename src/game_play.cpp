@@ -133,7 +133,7 @@ int playAI(std::array<char, 9> &gameBoard, int turn, char const empty)
     return getRandomPosition(gameBoard, empty);
 }
 // Play one turn
-int play(std::array<char, 9> &gameBoard, Player const player, int const turn, bool const AI, char const empty, bool const help)
+int play(std::array<char, 9> &gameBoard, Player const player, int const turn, char const empty, bool const help)
 {
     int position{-1};
     if (turn < static_cast<int>(gameBoard.size()))
@@ -144,11 +144,11 @@ int play(std::array<char, 9> &gameBoard, Player const player, int const turn, bo
 
         std::cout << "Tour de " << player.name << " (" << player.symbol << ")" << std::endl;
 
-        position = (AI)
+        position = (player.isAI)
                        ? playAI(gameBoard, turn, empty)
                        : getValidPosition("Emplacement : ", "Choisir un emplacement valide. Réessayez.", gameBoard);
 
-        if (AI)
+        if (player.isAI)
         {
             std::cout << "Emplacement choisi par l'IA : " << position + 1 << std::endl;
         }

@@ -25,4 +25,4 @@ enum class Move
 };
 
 bool win(std::array<char, 9> const &gameBoard, std::vector<Move> const directions, int const lastPosition, int const turn, char const empty = ' ');
-int play(std::array<char, 9> &gameBoard, Player const player, int const turn, bool const AI, char const empty = ' ', bool const help = false);
+int play(std::array<char, 9> &gameBoard, Player const player, int const turn, char const empty = ' ', bool const help = false);

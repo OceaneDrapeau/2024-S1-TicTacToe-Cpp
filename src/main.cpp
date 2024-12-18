@@ -70,7 +70,7 @@ int main()
     do
     {
         std::cout << std::endl;
-        lastPosition = play(gameBoard, player1, turn, player1.isAI, empty, help);
+        lastPosition = play(gameBoard, player1, turn, empty, help);
         if (lastPosition == -1)
         {
             std::cout << "turn >= gameBooardSize" << std::endl;
