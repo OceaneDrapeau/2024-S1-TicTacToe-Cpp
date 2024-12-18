@@ -42,7 +42,7 @@ Player create_player(char const symbol1, char const symbol2)
 Player create_player(Player const &player1, char const symbol1, char const symbol2, bool const AI)
 {
     return {
-        (AI) ? "AI" : playerName(),
+        (AI) ? "IA" : playerName(),
         (player1.symbol == symbol1) ? symbol2 : symbol1,
         AI};
 }

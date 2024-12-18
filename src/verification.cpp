@@ -110,7 +110,7 @@ char getValidInputChar(std::string const &nameField, std::string const &errorMes
 
         if (!inputValid)
         {
-            std::cout << errorMessage;
+            std::cout << errorMessage << std::endl;
         }
 
     } while (!inputValid);
@@ -136,7 +136,7 @@ int getValidInputInt(std::string const &nameField, std::string const &errorMessa
 
         if (!inputValid)
         {
-            std::cout << errorMessage;
+            std::cout << errorMessage << std::endl;
         }
 
     } while (!inputValid);
@@ -162,7 +162,7 @@ int getValidInputInt(std::string const &nameField, std::string const &errorMessa
 
         if (!inputValid)
         {
-            std::cout << errorMessage;
+            std::cout << errorMessage << std::endl;
         }
 
     } while (!inputValid);
@@ -188,10 +188,25 @@ int getValidPosition(std::string const &nameField, std::string const &errorMessa
 
         if (!inputValid)
         {
-            std::cout << errorMessage;
+            std::cout << errorMessage << std::endl;
         }
 
     } while (!inputValid);
 
     return input - 1;
 };
+
+// Find a random empty position for AI
+int getRandomPosition(std::array<char, 9> &gameBoard, char const empty)
+{
+    int randomInt{};
+    int gameBoardSize{static_cast<int>(gameBoard.size())};
+
+    do
+    {
+        randomInt = std::rand() % gameBoardSize;
+
+    } while (gameBoard[randomInt] != empty);
+
+    return randomInt;
+}

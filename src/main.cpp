@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+
 #include "player.hpp"
 #include "game_board.hpp"
 #include "game_play.hpp"
@@ -10,6 +12,7 @@ int main()
     std::setlocale(LC_ALL, ".65001");
 
     // Initializations
+    std::srand(std::time(nullptr));
 
     // Change display
     bool help{};
@@ -32,6 +35,7 @@ int main()
 
     // Game board
     std::array<char, 9> gameBoard{create_game_board(' ')};
+    int gameBoardSize{static_cast<int>(gameBoard.size())};
 
     // Players
     Player player1{};
@@ -67,16 +71,21 @@ int main()
     {
         std::cout << std::endl;
         lastPosition = play(gameBoard, player1, turn, player1.isAI, empty, help);
-        gameOver =
-            (lastPosition == -1)
-                ? true
-                : win(gameBoard, directions, lastPosition, turn, empty);
+        if (lastPosition == -1)
+        {
+            std::cout << "turn >= gameBooardSize" << std::endl;
+            gameOver = true;
+        }
+        else
+        {
+            gameOver = win(gameBoard, directions, lastPosition, turn, empty);
+        }
 
         std::swap(player1, player2);
         turn += 1;
 
         // Check if it's last turn
-        if (turn >= static_cast<int>(gameBoard.size()))
+        if (turn == gameBoardSize && !gameOver)
         {
             std::cout << "\nC'est un match nul !" << std::endl;
             gameOver = true;
