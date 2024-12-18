@@ -2,7 +2,7 @@
 
 // Check all direction for a win condition based on the last position
 
-std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int const lastPosition, Move const direction, int repeat, char const empty)
+int checkDirection(std::array<char, 9> const &gameBoard, int const lastPosition, Move const direction, int repeat, char const empty)
 {
     // Initializations
 
@@ -21,7 +21,7 @@ std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int cons
     // Avoid wrong placement
     if (symbol == empty)
     {
-        return {false, -1};
+        return -1;
     };
 
     // Check if end of the gameBoard
@@ -42,19 +42,19 @@ std::array<int, 2> checkDirection(std::array<char, 9> const &gameBoard, int cons
             repeat += 1;
             if (repeat == 3)
             {
-                return {true, repeat};
+                return repeat;
             }
         }
 
         // Symbol different
         else
         {
-            return {false, 0};
+            return 0;
         }
     }
 
     // End of the board but verification not complete
-    return {false, repeat};
+    return repeat;
 }
 
 // Directions
@@ -70,36 +70,47 @@ bool win(std::array<char, 9> const &gameBoard, std::vector<Move> const direction
         return false;
     };
 
+    int change{0};
     bool skip{false};
     bool newDirection{true};
 
-    std::array<int, 2> result{false, 1};
+    int repeat{1};
 
     for (Move move : directions)
     {
         if (!skip)
         {
-            result = checkDirection(gameBoard, lastPosition, move, result[1], empty);
-            if (result[0])
+            repeat = checkDirection(gameBoard, lastPosition, move, repeat, empty);
+
+            switch (repeat)
             {
-                return true;
-            }
-            else if (result[1] == 0)
-            {
-                result[1] = 1;
-                skip = newDirection;
-            }
-            else if (result[1] == -1)
-            {
+            case -1:
                 // empty placement
                 return false;
+
+            case 0:
+                repeat = 1;
+                skip = newDirection;
+                break;
+
+            case 3:
+                return true;
+
+            default:
+                change += 1;
+                if (change == 2)
+                {
+                    return false;
+                }
+                break;
             }
         }
         else
         {
-            result[1] = 1;
+            repeat = 1;
             skip = !skip;
         }
+
         newDirection = !newDirection;
     }
 
